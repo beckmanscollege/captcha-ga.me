@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>impossible captcha game</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!--IMAGE CAPTCHA -->
+    <div id="captchaContainer">
+      <div id="blueBar">
+        <p id="imageP">
+          Click on all images containing streetlights
+        </p>
+      </div>
+      <div id="boxContainer">
+        <div id="box1" class="box">
+          <video id="video1" class="webcam" autoplay></video>
+          <img src="https://cdn.glitch.global/c5bb1544-2b7d-4255-9aec-9f2f119643f9/streetlight?v=1707300057848" id="streetlight1" class="streetlight">
+        </div>
+        <div id="box2" class="box">
+          <video id="video2" class="webcam" autoplay></video>
+          <img src="https://cdn.glitch.global/c5bb1544-2b7d-4255-9aec-9f2f119643f9/streetlight?v=1707300057848" id="streetlight2" class="streetlight">
+        </div>
+        <div id="box3" class="box">
+          <video id="video3" class="webcam" autoplay></video>
+          <img src="https://cdn.glitch.global/c5bb1544-2b7d-4255-9aec-9f2f119643f9/streetlight?v=1707300057848" id="streetlight3" class="streetlight">
+        </div>
+        <div id="box4" class="box">
+          <video id="video4" class="webcam" autoplay></video>
+          <img src="https://cdn.glitch.global/c5bb1544-2b7d-4255-9aec-9f2f119643f9/streetlight?v=1707300057848" id="streetlight4" class="streetlight">
+        </div>
+        <div id="box5" class="box">
+          <video id="video5" class="webcam" autoplay></video>
+          <img src="https://cdn.glitch.global/c5bb1544-2b7d-4255-9aec-9f2f119643f9/streetlight?v=1707300057848" id="streetlight5" class="streetlight">
+        </div>
+        <div id="box6" class="box">
+          <video id="video6" class="webcam" autoplay></video>
+          <img src="https://cdn.glitch.global/c5bb1544-2b7d-4255-9aec-9f2f119643f9/streetlight?v=1707300057848" id="streetlight6" class="streetlight">
+        </div>
+        <div id="box7" class="box">
+          <video id="video7" class="webcam" autoplay></video>
+          <img src="https://cdn.glitch.global/c5bb1544-2b7d-4255-9aec-9f2f119643f9/streetlight?v=1707300057848" id="streetlight7" class="streetlight">
+        </div>
+        <div id="box8" class="box">
+          <video id="video8" class="webcam" autoplay></video>
+          <img src="https://cdn.glitch.global/c5bb1544-2b7d-4255-9aec-9f2f119643f9/streetlight?v=1707300057848" id="streetlight8" class="streetlight">   
+        </div>
+        <div id="box9" class="box">
+          <video id="video9" class="webcam" autoplay></video>
+          <img src="https://cdn.glitch.global/c5bb1544-2b7d-4255-9aec-9f2f119643f9/streetlight?v=1707300057848" id="streetlight9" class="streetlight">   
+        </div>
+      </div>
+      <div id="buttons">
+        <div>
+          <img src="https://cdn.glitch.global/c5bb1544-2b7d-4255-9aec-9f2f119643f9/redo-arrow-icon.svg?v=1707217974399" id="replay">
+        </div>
+        <div>
+          <img src="https://cdn.glitch.global/c5bb1544-2b7d-4255-9aec-9f2f119643f9/headphone-icon.svg?v=1707218369925" id="headphones">
+        </div>
+        <div>
+          <img src="https://cdn.glitch.global/c5bb1544-2b7d-4255-9aec-9f2f119643f9/info.svg?v=1707217970457" id="info">
+        </div>
+        <button id="skip">
+          Skip
+        </button>
+      </div>
+    </div>
+    
+    <!-- TEXT CAPTCHA -->
+    <div id="textCaptchaContainer">
+      <p id="captchaP">
+        CAPTCHA security check (<span id="whatIsThis">what is this?</span>)</p>
+      <div id="textCaptcha">
+        <div id="textContainer">
+          <img src="https://cdn.glitch.global/c5bb1544-2b7d-4255-9aec-9f2f119643f9/captcha.gif?v=1707517344754" id="textCaptchaGif">
+        </div>
+        <input type="text" id="captchaPasscode" placeholder="Enter the text you see on the image">
+      </div>
+      <button id="skipTwo">
+          Skip
+        </button>
+    </div>
+    
+    <!-- FINAL CAPTCHA -->
+    <div id="finalCaptchaContainer">
+    <input type="checkbox" id="notARobot" name="Robot" value="NotRobot" onclick="finalCheck()">
+    <p id="notARobotText"> I'm not a robot</p> <img src="https://cdn.glitch.global/c5bb1544-2b7d-4255-9aec-9f2f119643f9/recaptchaLogo?v=1707523364727" id="reCaptcha">
+    </div>
+    <script src="script.js"></script>
+    <div id="humanResults">
+      <p id="finalVerdict">
+        final verdict
+      </p>
+      <h1>
+        HUMAN
+      </h1>
+      <p id="subtitle">
+        Congratulations! You've proven to be human. Human Points: <script>document.write(humanCounter)</script>/5
+      </p>
+      <button class="replayButton">
+          Try again?
+        </button>
+    </div>
+    <div id="roboResults">
+      <p class="finalVerdict">
+        final verdict
+      </p>
+      <h1 id="roboth1">
+        ROBOT
+      </h1>
+      <p class="subtitle">
+        You weren't quite convincing enough.<br>Human Points: <script>document.write(humanCounter)</script>/5 
+      </p>
+      <button id="replayButtonRed" onclick="window.location.href=window.location.href">
+          Try again?
+        </button>
+    </div>
+    
+    <div id="skipResults">
+      <p class="finalVerdict">
+        final verdict
+      </p>
+      <h1 id="skiph1">
+        UNCLEAR
+      </h1>
+      <p class="subtitle">
+        I mean. You did skip every level.
+      </p>
+      <button class="replayButton">
+          Try again?
+        </button>
+    </div>
+  </body>
+</html>
