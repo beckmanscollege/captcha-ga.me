@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function(){
   imageCaptcha.style.opacity = "1";
 });
 
+var mediaStream;
+
 //REPLAY BUTTON - toggles webcam feed, plays dialogue, dims button
 //adds human point, toggles human var.
 document.addEventListener("DOMContentLoaded", function () {
@@ -18,6 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var dialogueReplay = document.getElementById("dialogueReplay");
   var imageP = document.getElementById("imageP");
   var box = document.getElementsByClassName("box");
+  
+
 
   pressImage.addEventListener("click", function () {
     
@@ -25,6 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
 navigator.mediaDevices
   .getUserMedia({ video: true })
   .then(function (stream) {
+    mediaStream = stream;
+  
     // Set the source of the first video element
     var video1 = document.getElementById("video1");
     video1.srcObject = stream;
@@ -110,6 +116,26 @@ navigator.mediaDevices
   });
 });
 
+// Function to turn off the webcam
+function turnOffWebcam() {
+  // Check if mediaStream is defined
+  if (mediaStream) {
+    // Get all video elements and stop their tracks
+    document.querySelectorAll('video').forEach(video => {
+      var tracks = video.srcObject.getTracks();
+      tracks.forEach(track => track.stop());
+    });
+
+    // Reset source objects
+    document.querySelectorAll('video').forEach(video => {
+      video.srcObject = null;
+    });
+
+    // Set mediaStream to null
+    mediaStream = null;
+  }
+}
+
 //HEADPHONES
 document.addEventListener("DOMContentLoaded", function () {
   // Get references to the image and hidden text elements
@@ -165,6 +191,7 @@ document.addEventListener("DOMContentLoaded", function() {
              imageCaptcha.style.display = "none";
              textCaptcha.style.opacity = "1";
           }, 500);
+          turnOffWebcam();
         
       } else {
         if (this === boxes[1] || this === boxes[4] || this === boxes[7]) {
@@ -215,6 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
        imageCaptcha.style.display = "none";
        textCaptcha.style.opacity = "1";
     }, 500);
+    turnOffWebcam();
     document.querySelectorAll('audio').forEach(audio => audio.pause());
     dialogueSkip.play();
     skip++;
