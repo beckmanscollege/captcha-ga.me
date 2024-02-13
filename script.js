@@ -91,6 +91,7 @@ navigator.mediaDevices
       }
     }
     
+    
     //CHANGES TEXT CONTENT
     imageP.textContent = "Click on all images containing a human";
     
@@ -116,7 +117,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var dialogueHeadphones = document.getElementById("dialogueHeadphones");
 
   pressImage2.addEventListener("click", function () {
-    pressImage2.style.opacity = "0.2"; 
+    pressImage2.style.opacity = "0.2";
+    document.querySelectorAll('audio').forEach(audio => audio.pause());
     dialogueHeadphones.play();
     humanCounter++;
   });
@@ -129,7 +131,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var dialogueInfo = document.getElementById("dialogueInfo");
 
   pressImage3.addEventListener("click", function () {
-    pressImage3.style.opacity = "0.2"; 
+    pressImage3.style.opacity = "0.2";
+    document.querySelectorAll('audio').forEach(audio => audio.pause());
     dialogueInfo.play();
     humanCounter++;
   });
@@ -140,20 +143,53 @@ document.addEventListener("DOMContentLoaded", function() {
   var boxes = document.getElementsByClassName("box");
   var dialogueSLWrong = document.getElementById("dialogueStreetlightWrong");
   var dialogueStreetlight = document.getElementById("dialogueStreetlight");
-  var dialogueHuman = document.getElementById("dialogueHuman");
+  //var dialogueHuman = document.getElementById("dialogueHuman");
+  var textCaptcha = document.getElementById("textCaptchaContainer");
+  var imageCaptcha = document.getElementById("captchaContainer");
+  
+  var clickedBoxes = {
+  1: false,
+  4: false,
+  7: false
+};
 
   for (var i = 0; i < boxes.length; i++) {
     boxes[i].addEventListener("click", function () {
       if (human) {
         //NEED TO ADD: MOVE TO NEXT CAPTCHA
-          dialogueHuman.play();
+          //dialogueHuman.play();
+          imageCaptcha.style.opacity = "0";
+          textCaptcha.style.display = "inline";
+
+              setTimeout(function() {
+             imageCaptcha.style.display = "none";
+             textCaptcha.style.opacity = "1";
+          }, 500);
+        
       } else {
         if (this === boxes[1] || this === boxes[4] || this === boxes[7]) {
           // Change opacity for boxes 2, 5, and 8
           this.style.opacity = "0.5";
+          //document.querySelectorAll('audio').forEach(audio => audio.pause());
+          //dialogueStreetlight.play();
+          clickedBoxes[this.dataset.boxNumber] = true;
+          
+          
+          if (clickedBoxes[1] && clickedBoxes[4] && clickedBoxes[7]) {
+          document.querySelectorAll('audio').forEach(audio => audio.pause());
           dialogueStreetlight.play();
+            setTimeout(function(){
+            imageCaptcha.style.opacity = "0";
+            textCaptcha.style.display = "inline";
+
+              setTimeout(function() {
+             imageCaptcha.style.display = "none";
+             textCaptcha.style.opacity = "1";
+          }, 500);}, 200);}
+            
         } else {
           this.style.opacity = "0.5";
+          document.querySelectorAll('audio').forEach(audio => audio.pause());
           dialogueSLWrong.play();
         }
       }
@@ -171,26 +207,18 @@ document.addEventListener("DOMContentLoaded", function () {
   var textCaptcha = document.getElementById("textCaptchaContainer");
 
   pressImage4.addEventListener("click", function () {
+    
     imageCaptcha.style.opacity = "0";
-    textCaptcha.style.opacity = "1";
-    pressImage4.style.opacity = "0.2";
+    textCaptcha.style.display = "flex";
+
+        setTimeout(function() {
+       imageCaptcha.style.display = "none";
+       textCaptcha.style.opacity = "1";
+    }, 500);
+    document.querySelectorAll('audio').forEach(audio => audio.pause());
     dialogueSkip.play();
     skip++;
-  });
-});
-
-//INFO - plays dialogue, dims the button
-document.addEventListener("DOMContentLoaded", function () {
-  // Get references to the image and hidden text elements
-  var whatIsThis = document.getElementById("whatIsThis");
-  var dialogueWhatIsThis = document.getElementById("dialogueWhatIsThis");
-
-  whatIsThis.addEventListener("click", function () {
-    whatIsThis.style.opacity = "0.2"; 
-    
-    dialogueWhatIsThis.play();
-    humanCounter++;
-    console.log(humanCounter);
+    console.log(skip);
   });
 });
 
@@ -216,43 +244,81 @@ captchaPasscode.addEventListener("keydown", function(event) {
 
 var textCaptcha = document.getElementById("textCaptchaContainer");
 var finalCaptcha = document.getElementById("finalCaptchaContainer");
+
 function submitForm() {
     if (captchaPasscode.value === correctPasscode1) {
         textCaptcha.style.opacity = "0";
-        finalCaptcha.style.opacity = "1";
+        finalCaptcha.style.display = "flex";
+
+        setTimeout(function() {
+       textCaptcha.style.display = "none";
+       finalCaptcha.style.opacity = "1";
+    }, 2500);
+        document.querySelectorAll('audio').forEach(audio => audio.pause());
         dialoguePlease.play();
         humanCounter++;
         captchaPasscode.value = "";
         console.log(humanCounter);
     } else {
         if (captchaPasscode.value === correctPasscode2) {
-            //dialogueFuckYou.play();
+            document.querySelectorAll('audio').forEach(audio => audio.pause());
+            dialogueFuckYou.play();
+            textCaptcha.style.opacity = "0";
+            finalCaptcha.style.display = "flex";
+
+            setTimeout(function() {
+           textCaptcha.style.display = "none";
+           finalCaptcha.style.opacity = "1";
+        }, 2500);
             humanCounter++;
             console.log(humanCounter);
             captchaPasscode.value = "";
         } else {
+            document.querySelectorAll('audio').forEach(audio => audio.pause());
             dialogueWrongPasscode.play();
         }
     }
 }
 
+//INFO - plays dialogue, dims the button
+document.addEventListener("DOMContentLoaded", function () {
+  // Get references to the image and hidden text elements
+  var whatIsThis = document.getElementById("whatIsThis");
+  var dialogueWhatIsThis = document.getElementById("dialogueWhatIsThis");
+
+  whatIsThis.addEventListener("click", function () {
+    whatIsThis.style.opacity = "0.2"; 
+    document.querySelectorAll('audio').forEach(audio => audio.pause());
+    dialogueWhatIsThis.play();
+    humanCounter++;
+    console.log(humanCounter);
+  });
+});
+
 //SKIP - plays dialogue, changes to next captcha
 document.addEventListener("DOMContentLoaded", function () {
   // Get references to the image and hidden text elements
   var skipTwo = document.getElementById("skipTwo");
-  var dialogueSkip2 = document.getElementById("dialogueSkip2");
+  var dialogueSkip2 = document.getElementById("dialogueSkipTwo");
   var textCaptcha = document.getElementById("textCaptchaContainer");
   var finalCaptcha = document.getElementById("finalCaptchaContainer");
 
   skipTwo.addEventListener("click", function () {
     textCaptcha.style.opacity = "0";
-    finalCaptcha.style.opacity = "1";
-    skip.style.opacity = "0.2";
+    finalCaptcha.style.display = "flex";
+
+    setTimeout(function() {
+   textCaptcha.style.display = "none";
+   finalCaptcha.style.opacity = "1";
+}, 500);
+    skipTwo.style.opacity = "0.2";
+    document.querySelectorAll('audio').forEach(audio => audio.pause());
     dialogueSkip2.play();
     skip++;
+    console.log(skip);
   });
 });
-
+/*
 //SKIP - plays dialogue, changes to next captcha
 document.addEventListener("DOMContentLoaded", function () {
   // Get references to the image and hidden text elements
@@ -265,7 +331,7 @@ document.addEventListener("DOMContentLoaded", function () {
     dialogueSkip2.play();
     skip++;
   });
-});
+});*/
 
 //FINAL CAPTCHA FROM HERE ON OUT
 
@@ -279,30 +345,32 @@ function finalCheck() {
   var dialogueUnsure = document.getElementById("dialogueUnsure");
   var humanResults = document.getElementById("humanResults");
   var roboResults = document.getElementById("roboResults");
+  var skipResults = document.getElementById("skipResults");
+  var humanCounterSpan = document.getElementById("humanCounterSpan");
+  var humanCounterSpan2 = document.getElementById("humanCounterSpan2");
+  
+  humanCounterSpan.textContent = humanCounter;
+  humanCounterSpan2.textContent = humanCounter;
 
   // If the checkbox is checked, display the output text
-  if (checkBox.checked == true){
-    //dialogueCheckbox.play();
-    if (humanCounter >= 5){
-    if (humanResults.style.display === 'none' || humanResults.style.display === '') {
-          humanResults.style.display = 'flex';
-      } else {
-          humanResults.style.display = 'flex';
-      }
-    }
-   else {
-        if (skip === 2) {
+    if (checkBox.checked) {
+    if (humanCounter >= 5) {
+        document.querySelectorAll('audio').forEach(audio => audio.pause());
+        dialogueHumanResults.play();
+        humanResults.style.display = 'flex';
+        humanResults.style.opacity = "1";
+    } else {
+        if (skip == 2) {
+            document.querySelectorAll('audio').forEach(audio => audio.pause());
             dialogueSkipResults.play();
-          
+            skipResults.style.display = 'flex';
+            skipResults.style.opacity = "1";
         } else {
             console.log(humanCounter);
-            //dialogueRoboResults.play();
-            if (roboResults.style.display === 'none' || roboResults.style.display === '') {
-                roboResults.style.display = 'flex';
-                roboResults.style.opacity = "1";
-            } else {
-                roboResults.style.display = 'flex';
-            }
+            document.querySelectorAll('audio').forEach(audio => audio.pause());
+            dialogueRoboResults.play();
+            roboResults.style.display = 'flex';
+            roboResults.style.opacity = "1";
         }
     }
 }
