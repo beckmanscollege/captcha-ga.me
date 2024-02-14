@@ -6,6 +6,124 @@ body {
   align-items: center;
 }
 
+footer {
+  position: fixed;
+  left: 0;
+  bottom:0;
+  padding: 5px;
+  width: 100%;
+  color: black;
+  text-align: center;
+  font-family: helvetica, sans-serif;
+  font-size: 2vh;
+  position: absolute;
+  opacity: 0.3;
+  transition: opacity 0.5s ease;
+}
+
+footer:hover {
+  opacity: 0.5;
+  transition: opacity 0.5s ease;
+}
+
+@media screen and (min-height: 1000px) and (max-width: 1000px) {
+  footer {
+  font-size: 1.2vh;
+  opacity: 0.3;
+  }
+}
+
+#leftArrowPng {
+  height: 4vh;
+  position: absolute;
+  top: 0vh;
+  left: 0vh;
+}
+
+#leftArrowTxt {
+  font-family: helvetica, sans-serif;
+  font-size: 2.5vh;
+  position: absolute;
+  top: 0.8vh;
+  left: 4vh;
+  color: black;
+}
+
+#leftArrow {
+  height: 4vh;
+  width: 25vh;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+  position: absolute;
+  top: 2vh;
+  left: 2vh;
+}
+
+@media screen and (min-height: 1000px) and (max-width: 1000px) {
+  #leftArrow {
+    top: 2.75vh;
+    transform: scale(0.6);  /* Adjust the translation for mobile screens */
+    opacity: 0.2;
+    left: 0vh;
+  }
+  
+}@media screen and (min-height: 1000px) and (max-width: 1000px) {
+  #leftArrowTxt {
+    display: none;
+  }
+}
+
+#leftArrow:hover {
+  opacity: 0.2;
+  transition: opacity 0.2s ease;
+}
+
+#rightArrowPng {
+  height: 4vh;
+  position: absolute;
+  right: 0vh;
+  top: 0vh;
+}
+
+#rightArrowTxt {
+  position: absolute;
+  top: 0.8vh;
+  right: 5.5vh;
+  font-family: helvetica, sans-serif;
+  font-size: 2.5vh;
+  color: black;
+}
+
+#rightArrow {
+  height: 4vh;
+  width: 25vh;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+  position: fixed;
+  top: 2vh;
+  right: 2vh;
+}
+
+@media screen and (min-height: 1000px) and (max-width: 1000px) {
+  #rightArrow {
+    top: 2.75vh;
+    transform: scale(0.6);  /* Adjust the translation for mobile screens */
+    opacity: 0.2;
+    right: 0vh;
+  }
+}
+
+@media screen and (min-height: 1000px) and (max-width: 1000px) {
+  #rightArrowTxt {
+    display: none;
+  }
+}
+
+#rightArrow:hover {
+  opacity: 0.2;
+  transition: opacity 0.2s ease;
+}
+
 #captchaContainer {
   background-color: #FFFFFF;
   position: fixed;
