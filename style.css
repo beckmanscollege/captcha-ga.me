@@ -62,7 +62,8 @@ footer:hover {
 
 @media screen and (min-height: 1000px) and (max-width: 1000px) {
   #leftArrow {
-    top: 2.75vh;
+    position: absolute;
+    top: 3.7vh;
     transform: scale(0.6);  /* Adjust the translation for mobile screens */
     opacity: 0.2;
     left: 0vh;
