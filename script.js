@@ -1,6 +1,9 @@
 var humanCounter = 0;
 var human = false;
 var skip = 0;
+var infoPressed = false;
+var headphonesPressed = false;
+var replayPressed = false;
 
 document.addEventListener("DOMContentLoaded", function(){
   var imageCaptcha = document.getElementById("captchaContainer");
@@ -109,10 +112,12 @@ navigator.mediaDevices
 
     // Play the replay dialogue
     dialogueReplay.play();
-    humanCounter++;
     human = true;
     console.log(humanCounter);
     console.log(human);
+    if (replayPressed == false) {
+        humanCounter++;
+        replayPressed = true; }
   });
 });
 
@@ -146,7 +151,9 @@ document.addEventListener("DOMContentLoaded", function () {
     pressImage2.style.opacity = "0.2";
     document.querySelectorAll('audio').forEach(audio => audio.pause());
     dialogueHeadphones.play();
-    humanCounter++;
+    if (headphonesPressed == false) {
+        humanCounter++;
+        headphonesPressed = true; }
   });
 });
 
@@ -160,8 +167,9 @@ document.addEventListener("DOMContentLoaded", function () {
     pressImage3.style.opacity = "0.2";
     document.querySelectorAll('audio').forEach(audio => audio.pause());
     dialogueInfo.play();
-    humanCounter++;
-  });
+      if (infoPressed == false) {
+        humanCounter++;
+        infoPressed = true; }  });
 });
 
 //BOXES - 
@@ -312,14 +320,16 @@ function submitForm() {
 document.addEventListener("DOMContentLoaded", function () {
   // Get references to the image and hidden text elements
   var whatIsThis = document.getElementById("whatIsThis");
+  var whatIsThisPressed = false;
   var dialogueWhatIsThis = document.getElementById("dialogueWhatIsThis");
 
   whatIsThis.addEventListener("click", function () {
     whatIsThis.style.opacity = "0.2"; 
     document.querySelectorAll('audio').forEach(audio => audio.pause());
     dialogueWhatIsThis.play();
-    humanCounter++;
-    console.log(humanCounter);
+    if (whatIsThisPressed == false) {
+        humanCounter++;
+        whatIsThisPressed = true; };
   });
 });
 

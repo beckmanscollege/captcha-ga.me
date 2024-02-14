@@ -15,7 +15,7 @@ footer {
   color: black;
   text-align: center;
   font-family: helvetica, sans-serif;
-  font-size: 2vh;
+  font-size: 1.8vh;
   position: absolute;
   opacity: 0.3;
   transition: opacity 0.5s ease;
@@ -50,13 +50,14 @@ footer:hover {
 }
 
 #leftArrow {
-  height: 4vh;
+  height: vh;
   width: 25vh;
-  opacity: 0.5;
+  opacity: 0.3;
   transition: opacity 0.2s ease;
   position: absolute;
   top: 2vh;
-  left: 2vh;
+  left: -2vh;
+  transform: scale(0.6);
 }
 
 @media screen and (min-height: 1000px) and (max-width: 1000px) {
@@ -97,11 +98,12 @@ footer:hover {
 #rightArrow {
   height: 4vh;
   width: 25vh;
-  opacity: 0.5;
+  opacity: 0.3;
   transition: opacity 0.2s ease;
   position: fixed;
-  top: 2vh;
-  right: 2vh;
+  top: 1.2vh;
+  right: -2vh;
+  transform: scale(0.6);
 }
 
 @media screen and (min-height: 1000px) and (max-width: 1000px) {
